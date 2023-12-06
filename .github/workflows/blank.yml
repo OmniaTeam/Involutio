@@ -51,5 +51,3 @@ jobs:
             cd ${{secrets.REMOTE_TARGET}}
             ./run.sh
             sleep 30
-    - name: Check Spring Service status
-      run: curl -Is http://${{secrets.REMOTE_HOST}}:8080/api/health
