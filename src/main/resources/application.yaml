@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://82.97.240.16:5432/involutio
+    username: hack
+    password: hack
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+logging:
+  file:
+    name: ./logs/application.log
+  pattern:
+#    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"
+  level:
+    org.springframework: error
+    root: info
+    com.omnia: info
