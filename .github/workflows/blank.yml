@@ -50,4 +50,6 @@ jobs:
           SCRIPT_AFTER: |
             cd ${{secrets.REMOTE_TARGET}}
             ./run.sh
-
+            sleep 30
+    - name: Check Spring Service status
+      run: curl http://{{REMOTE_HOST}}:8080/api/health
