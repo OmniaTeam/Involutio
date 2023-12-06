@@ -38,17 +38,16 @@ jobs:
       uses: easingthemes/ssh-deploy@main
       with:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: "-rlgoDzvc -i --delete"
+          ARGS: "-rlgoDzvc -i"
           SOURCE: "build/libs/"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_TARGET }}
           EXCLUDE: "/build/libs/"
           SCRIPT_BEFORE: |
-            echo pwd
             cd ${{secrets.REMOTE_TARGET}}
             ./stop.sh
           SCRIPT_AFTER: |
-            ls -a
+            cd ${{secrets.REMOTE_TARGET}}
             ./run.sh
 
