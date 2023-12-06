@@ -45,9 +45,9 @@ jobs:
           TARGET: ${{ secrets.REMOTE_TARGET }}
           EXCLUDE: "/build/libs/"
           SCRIPT_BEFORE: |
-            ls -al
+            ls -a
             ./stop.sh
           SCRIPT_AFTER: |
-            ls -al
+            ls -a
             ./run.sh
 
