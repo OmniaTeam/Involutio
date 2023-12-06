@@ -44,3 +44,10 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_TARGET }}
           EXCLUDE: "/build/libs/"
+          SCRIPT_BEFORE: |
+            ls -al
+            ./stop.sh
+          SCRIPT_AFTER: |
+            ls -al
+            ./run.sh
+
