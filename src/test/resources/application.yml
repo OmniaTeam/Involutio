@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://82.97.240.16:5432/testdb
+    username: hack
+    password: hack
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
