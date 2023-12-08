@@ -18,6 +18,7 @@ public class UserEntity implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String fio;
+    @Column(unique = true)
     private String login;
     private String password;
     @Enumerated(EnumType.ORDINAL)
