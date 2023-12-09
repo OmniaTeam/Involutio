@@ -11,4 +11,6 @@ import java.util.List;
 public interface WorkerRepository extends JpaRepository<WorkerEntity, Long> {
     List<WorkerEntity> getAllByManagerId(Long managerId);
 
+    @Query("SELECT AVG(worker.rating) FROM WorkerEntity worker where worker.managerId = ?1")
+    Double getAVG(Long managerId);
 }
