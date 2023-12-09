@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface WorkerRepository extends JpaRepository<WorkerEntity, Long> {
-    List<WorkerEntity> getAllByManagerId(Long managerId);
+    List<WorkerEntity> findAllByManagerId(Long managerId);
 
     @Query("SELECT AVG(worker.rating) FROM WorkerEntity worker where worker.managerId = ?1")
     Double getAVG(Long managerId);

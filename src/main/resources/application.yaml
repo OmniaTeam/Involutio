@@ -7,6 +7,8 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+  jackson:
+    time-zone: Europe/Moscow
 logging:
   file:
     name: ./logs/application.log

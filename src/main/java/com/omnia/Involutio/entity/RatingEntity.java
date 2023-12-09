@@ -6,7 +6,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.extern.java.Log;
+
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -17,4 +18,12 @@ public class RatingEntity {
     private Long id;
     private double rating;
     private Long workerId;
+    private LocalDate date;
+
+
+    public RatingEntity(double rating, Long workerId, Long date) {
+        this.rating = rating;
+        this.workerId = workerId;
+        this.date = LocalDate.now();
+    }
 }

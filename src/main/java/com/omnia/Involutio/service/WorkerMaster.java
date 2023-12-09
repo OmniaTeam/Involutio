@@ -21,7 +21,7 @@ public class WorkerMaster { //TODO:покрыть исключением
 
     public List<WorkerEntity> getAllwithManager(Long managerId){
         try {
-            return workerRepository.getAllByManagerId(managerId);
+            return workerRepository.findAllByManagerId(managerId);
         } catch (Exception e) {
             e.printStackTrace();
         }

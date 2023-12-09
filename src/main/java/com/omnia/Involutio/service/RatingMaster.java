@@ -1,8 +1,12 @@
 package com.omnia.Involutio.service;
 
+import com.omnia.Involutio.entity.RatingEntity;
 import com.omnia.Involutio.repository.RatingRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -13,7 +17,7 @@ final private RatingRepository ratingRepository;
     }
 
     public Double getAVRwithWorker(Long workerId) {
-        var rating_list = ratingRepository.getAllByWorkerId(workerId);
+        var rating_list = ratingRepository.findAllByWorkerId(workerId);
         var size = rating_list.size();
         if (size > 0) {
             double summ = (double) 0;
@@ -24,6 +28,10 @@ final private RatingRepository ratingRepository;
         }else {
             return (double) 0;
         }
+    }
+
+    public List<RatingEntity> getStatistic(LocalDate start, LocalDate end){
+        return ratingRepository.findAllByDateBetween(start, end);
     }
 
 }
