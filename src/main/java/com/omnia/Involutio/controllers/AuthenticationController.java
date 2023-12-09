@@ -1,4 +1,4 @@
-package com.omnia.Involutio.controller;
+package com.omnia.Involutio.controllers;
 
 import com.omnia.Involutio.dto.SignInRequestDTO;
 import com.omnia.Involutio.dto.UserResponseDTO;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/api/authentication")
+@RequestMapping("/authentication")
 @Slf4j
 public class AuthenticationController {
 
