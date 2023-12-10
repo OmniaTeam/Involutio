@@ -52,7 +52,7 @@ jobs:
             ./run.sh
             sleep 30
     - name: Check Server Health
-        run: |
+      run: |
           response=$(curl -s -o /dev/null -w "%{http_code}" https://involutio.the-omnia.ru/api/v3/health)
           if [[ "$response" == "200" ]]; then
             echo "Server is healthy"
