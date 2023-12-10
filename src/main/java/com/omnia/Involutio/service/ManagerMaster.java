@@ -23,6 +23,11 @@ public class ManagerMaster {
         return managerRepository.findAll();
     }
 
+    public ManagerEntity getWithUser(Long userId){
+        var manager = managerRepository.findByUserId(userId);
+        return manager.orElse(null);
+    }
+
     public void updateRating(Long managerId){
         try {
             var manager = managerRepository.findById(managerId);
