@@ -11,7 +11,7 @@ public class GlobalHandlerException {
         return ResponseEntity.status(404).body(ex.getMessage() + " not found");
     }
     @ExceptionHandler
-    public ResponseEntity<?> workerNotFoundException(NotFoundException ex) {
+    public ResponseEntity<?> workerNotFoundException(WorkerNotFoundException ex) {
         return ResponseEntity.status(404).body(ex.getMessage() + " not found");
     }
 }
