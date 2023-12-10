@@ -35,10 +35,11 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(request -> request.requestMatchers(HttpMethod.POST,"/api/authentication").permitAll()
+                .authorizeHttpRequests(request -> request.requestMatchers(HttpMethod.POST,"/authentication").permitAll()
                         .requestMatchers(HttpMethod.GET,"/swagger-ui/**").permitAll()
                         .requestMatchers(HttpMethod.GET,"/v3/api-docs/**").permitAll()
                         .requestMatchers("/api/manager/**").hasAuthority(ERole.MANAGER.name())
+                        .requestMatchers("/health").permitAll()
 
 //                        .requestMatchers("/user").hasAuthority(Role.USER.name())
                         .anyRequest().authenticated())
