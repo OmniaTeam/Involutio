@@ -25,5 +25,5 @@ logging:
     file: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"
   level:
     org.springframework: info
-    root: off
+    root: info
     com.omnia: info

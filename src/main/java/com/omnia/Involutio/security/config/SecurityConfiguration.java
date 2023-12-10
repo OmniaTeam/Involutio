@@ -37,8 +37,8 @@ public class SecurityConfiguration {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request.requestMatchers(HttpMethod.POST,"/authentication").permitAll()
                         .requestMatchers(HttpMethod.GET,"/swagger-ui/**").permitAll()
-                        .requestMatchers(HttpMethod.GET,"/v3/api-docs/**").permitAll()
-                        .requestMatchers("/api/manager/**").hasAuthority(ERole.MANAGER.name())
+                        .requestMatchers(HttpMethod.GET,"/api-docs/**").permitAll()
+                        .requestMatchers("/manager/**").hasAuthority(ERole.MANAGER.name())
                         .requestMatchers("/health").permitAll()
 
 //                        .requestMatchers("/user").hasAuthority(Role.USER.name())
