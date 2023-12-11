@@ -6,6 +6,7 @@ import com.omnia.Involutio.entity.UserEntity;
 import com.omnia.Involutio.repository.UserRepository;
 import com.omnia.Involutio.service.JWTService;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -63,7 +64,11 @@ public class AuthenticationController {
 
     @GetMapping("/logout")
     public ResponseEntity<?> logout(HttpServletResponse response) {
+
         Cookie cookie = new Cookie("access_token", "");
+        cookie.setPath("/api/authentication");
+        cookie.setHttpOnly(true);
+        cookie.setMaxAge(0);
         response.addCookie(cookie);
         return ResponseEntity.ok().build();
     }
