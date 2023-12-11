@@ -57,7 +57,10 @@ public class FileMaster {
         var files = fileRepository.findByTypeAndProcessedIsFalse("csv");
         for (var i : files){
             csvReaderMaster.read(path + i.getName());
+            i.setProcessed(true);
+            fileRepository.save(i);
         }
+
     }
 
 
