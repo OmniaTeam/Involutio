@@ -1,6 +1,5 @@
 package com.omnia.Involutio.controllers;
 
-import com.omnia.Involutio.entity.WorkerEntity;
 import com.omnia.Involutio.service.RatingMaster;
 import com.omnia.Involutio.service.WorkerMaster;
 import lombok.extern.slf4j.Slf4j;
@@ -21,8 +20,9 @@ public class WorkerController {
     }
 
     @GetMapping("/{workerId}")
-    ResponseEntity<?> getUser(@PathVariable Long workerId){
-        return ResponseEntity.ok(new WorkerEntity());
+    ResponseEntity<?> getWorker(@PathVariable Long workerId)
+    {
+        return ResponseEntity.ok(workerMaster.getWorker(workerId));
     }
 
     @GetMapping("/{workerId}/stat")

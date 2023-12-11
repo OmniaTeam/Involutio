@@ -40,6 +40,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.GET,"/api-docs/**").permitAll()
                         .requestMatchers("/manager/**").hasAuthority(ERole.MANAGER.name())
                         .requestMatchers("/health").permitAll()
+                        .requestMatchers("/manager").permitAll()
 
 //                        .requestMatchers("/user").hasAuthority(Role.USER.name())
                         .anyRequest().authenticated())

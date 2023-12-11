@@ -1,5 +1,6 @@
 package com.omnia.Involutio.service;
 
+import com.omnia.Involutio.ecxeptions.NotFoundException;
 import com.omnia.Involutio.entity.ManagerEntity;
 import com.omnia.Involutio.repository.ManagerRepository;
 import com.omnia.Involutio.repository.WorkerRepository;
@@ -24,8 +25,7 @@ public class ManagerMaster {
     }
 
     public ManagerEntity getWithUser(Long userId){
-        var manager = managerRepository.findByUserId(userId);
-        return manager.orElse(null);
+        return managerRepository.findByUserId(userId).orElseThrow(() -> new NotFoundException(String.format("Manager with user id %d", userId)));
     }
 
     public void updateRating(Long managerId){

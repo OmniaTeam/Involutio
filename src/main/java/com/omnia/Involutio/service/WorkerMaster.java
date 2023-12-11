@@ -1,5 +1,7 @@
 package com.omnia.Involutio.service;
 
+import com.omnia.Involutio.ecxeptions.NotFoundException;
+import com.omnia.Involutio.entity.ManagerEntity;
 import com.omnia.Involutio.entity.WorkerEntity;
 import com.omnia.Involutio.repository.WorkerRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -9,7 +11,7 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class WorkerMaster { //TODO:покрыть исключением
+public class WorkerMaster {
     final private WorkerRepository workerRepository;
     final private RatingMaster ratingMaster;
 
@@ -19,22 +21,18 @@ public class WorkerMaster { //TODO:покрыть исключением
         this.ratingMaster = ratingMaster;
     }
 
-    public List<WorkerEntity> getAllwithManager(Long managerId){
-        try {
-            return workerRepository.findAllByManagerId(managerId);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+    public WorkerEntity getWorker(Long workerId){
+        return workerRepository.findById(workerId).orElseThrow(() -> new NotFoundException(String.format("worker with user id %d", workerId)));
+    }
+
+    public List<WorkerEntity> getAllWithManager(Long managerId){
+        return workerRepository.findAllByManagerId(managerId);
     }
 
     public void updateRating(Long workerId){
-        var worker = workerRepository.findById(workerId);
-        try {
-        worker.ifPresent(workerEntity -> workerEntity.setRating(ratingMaster.getAVRwithWorker(workerId)));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        WorkerEntity worker = getWorker(workerId);
+        // TODO: сохранит ли в бд без явного save?
+        worker.setRating(ratingMaster.getAVRwithWorker(workerId));
 
     }
 
