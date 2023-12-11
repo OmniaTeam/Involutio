@@ -22,10 +22,12 @@ public class FileEntity {
     private String name;
     private String type;
     private LocalDate date;
+    private boolean processed;
 
     public FileEntity(String name, String type) {
         this.name = name;
         this.type = type;
         this.date = LocalDate.now();
+        this.processed = false;
     }
 }
