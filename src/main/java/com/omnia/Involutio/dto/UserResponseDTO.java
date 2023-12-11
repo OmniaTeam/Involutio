@@ -10,12 +10,12 @@ public class UserResponseDTO {
     Long id;
     String fio;
     String login;
-    String classification;
+    String role;
 
     public UserResponseDTO(UserEntity user) {
         this.id = user.getId();
         this.fio = user.getFio();
         this.login = user.getLogin();
-        this.classification = user.getRole().name();
+        this.role = user.getRole().name();
     }
 }
