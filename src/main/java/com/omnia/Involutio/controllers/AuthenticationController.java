@@ -60,4 +60,11 @@ public class AuthenticationController {
         }
 
     }
+
+    @GetMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletResponse response) {
+        Cookie cookie = new Cookie("access_token", "");
+        response.addCookie(cookie);
+        return ResponseEntity.ok().build();
+    }
 }
