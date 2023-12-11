@@ -66,7 +66,7 @@ public class AuthenticationController {
     public ResponseEntity<?> logout(HttpServletResponse response) {
 
         Cookie cookie = new Cookie("access_token", "");
-        cookie.setPath("/api/authentication");
+        cookie.setPath("/");
         cookie.setHttpOnly(true);
         cookie.setMaxAge(0);
         response.addCookie(cookie);
