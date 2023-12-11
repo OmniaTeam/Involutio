@@ -28,6 +28,4 @@ logging:
     root: info
     com.omnia: info
 
-springdoc:
-  api-docs:
-    path: /api/v3/v3/api-docs
+
