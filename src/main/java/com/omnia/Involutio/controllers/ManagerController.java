@@ -1,11 +1,13 @@
 package com.omnia.Involutio.controllers;
 
 import com.omnia.Involutio.entity.ManagerEntity;
+import com.omnia.Involutio.entity.UserEntity;
 import com.omnia.Involutio.entity.WorkerEntity;
 import com.omnia.Involutio.service.ManagerMaster;
 import com.omnia.Involutio.service.WorkerMaster;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,8 +32,9 @@ public class ManagerController {
         return ResponseEntity.ok(managerMaster.getAll());
     }
 
-    @GetMapping("/{userId}")
-    ResponseEntity<ManagerEntity> getManager(@PathVariable Long userId){
+    @GetMapping
+    ResponseEntity<ManagerEntity> getManager(Authentication authentication){
+        Long userId = ((UserEntity) authentication.getPrincipal()).getId();
         return ResponseEntity.ok(managerMaster.getWithUser(userId));
     }
 
