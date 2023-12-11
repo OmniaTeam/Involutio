@@ -39,8 +39,8 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.GET,"/swagger-ui/**").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api-docs/**").permitAll()
                         .requestMatchers("/manager/**").hasAuthority(ERole.MANAGER.name())
-                        .requestMatchers("/manager").permitAll()
                         .requestMatchers("/health").permitAll()
+                        .requestMatchers("/manager").permitAll()
                         .requestMatchers("/files/**").permitAll()
                         .requestMatchers("/worker/**").permitAll()
 
