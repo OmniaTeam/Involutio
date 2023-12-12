@@ -17,8 +17,6 @@ public class CSVEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    private String fio;
     private String email;
     private int sentMessages;
     private int receivedMessages;
