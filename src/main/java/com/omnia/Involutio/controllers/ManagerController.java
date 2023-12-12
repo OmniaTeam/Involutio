@@ -38,6 +38,11 @@ public class ManagerController {
         return ResponseEntity.ok(managerMaster.getWithUser(userId));
     }
 
+    @GetMapping("/{manager_id}")
+    ResponseEntity<ManagerEntity> getManagerById(@PathVariable Long manager_id){
+        return ResponseEntity.ok(managerMaster.getWithManagerId(manager_id));
+    }
+
     @GetMapping("/{managerId}/workers")
     ResponseEntity<List<WorkerEntity>> getWorkers(@PathVariable Long managerId){
         return ResponseEntity.ok(workerMaster.getAllWithManager(managerId));

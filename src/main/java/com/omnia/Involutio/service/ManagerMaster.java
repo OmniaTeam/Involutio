@@ -32,6 +32,10 @@ public class ManagerMaster {
         return managerRepository.findByUserId(userId).orElseThrow(() -> new NotFoundException(String.format("Manager with user id %d", userId)));
     }
 
+    public ManagerEntity getWithManagerId(Long managerId){
+        return managerRepository.findById(managerId).orElseThrow(() -> new NotFoundException(String.format("Manager with manager id %d", managerId)));
+    }
+
     public void updateRating(Long managerId){
         try {
             var manager = managerRepository.findById(managerId);
