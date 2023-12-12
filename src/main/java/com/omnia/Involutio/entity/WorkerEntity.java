@@ -14,8 +14,9 @@ public class WorkerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String FIO;
-    private String mail;
     private Long managerId;
+    private String FIO;
+    private String speciality;
+    private String mail;
     private Double rating;
 }
