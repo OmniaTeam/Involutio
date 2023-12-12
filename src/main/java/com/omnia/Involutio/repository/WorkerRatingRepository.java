@@ -13,4 +13,6 @@ public interface WorkerRatingRepository extends JpaRepository<WorkerRatingEntity
     List<WorkerRatingEntity> findAllByWorkerId(Long workerId);
 
     List<WorkerRatingEntity> findAllByDateBetween(LocalDate startDate, LocalDate endDate);
+
+    List<WorkerRatingEntity> findTopByOrderByDateDesc(Long workerId);
 }

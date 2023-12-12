@@ -14,11 +14,10 @@ import java.util.List;
 public class WorkerRatingMaster {
 
 final private WorkerRatingRepository workerRatingRepository;
-final private ManagerRatingRepository managerRatingRepository;
+
 
     public WorkerRatingMaster(WorkerRatingRepository workerRatingRepository, ManagerRatingRepository managerRatingRepository) {
         this.workerRatingRepository = workerRatingRepository;
-        this.managerRatingRepository = managerRatingRepository;
     }
     //TODO: refactor to sql after testing
     public Double getAVRwithWorker(Long workerId) {
@@ -34,7 +33,6 @@ final private ManagerRatingRepository managerRatingRepository;
             return (double) 0;
         }
     }
-
 
     public List<WorkerRatingEntity> getStatistic(LocalDate start, LocalDate end){
         return workerRatingRepository.findAllByDateBetween(start, end);
