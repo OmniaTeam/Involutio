@@ -1,6 +1,6 @@
 package com.omnia.Involutio.controllers;
 
-import com.omnia.Involutio.service.RatingMaster;
+import com.omnia.Involutio.service.WorkerRatingMaster;
 import com.omnia.Involutio.service.WorkerMaster;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +13,10 @@ import java.time.LocalDate;
 @Slf4j
 public class WorkerController {
     final private WorkerMaster workerMaster;
-    final private RatingMaster ratingMaster;
-    public WorkerController(WorkerMaster workerMaster, RatingMaster ratingMaster) {
+    final private WorkerRatingMaster workerRatingMaster;
+    public WorkerController(WorkerMaster workerMaster, WorkerRatingMaster workerRatingMaster) {
         this.workerMaster = workerMaster;
-        this.ratingMaster = ratingMaster;
+        this.workerRatingMaster = workerRatingMaster;
     }
 
     @GetMapping("/{workerId}")
@@ -27,6 +27,6 @@ public class WorkerController {
 
     @GetMapping("/{workerId}/stat")
     ResponseEntity<?> getStatistic(@RequestParam ("start") LocalDate start, @RequestParam ("end") LocalDate end){
-        return ResponseEntity.ok(ratingMaster.getStatistic(start,end));
+        return ResponseEntity.ok(workerRatingMaster.getStatistic(start,end));
     }
 }

@@ -1,7 +1,6 @@
 package com.omnia.Involutio.service;
 
 import com.omnia.Involutio.ecxeptions.NotFoundException;
-import com.omnia.Involutio.entity.ManagerEntity;
 import com.omnia.Involutio.entity.WorkerEntity;
 import com.omnia.Involutio.repository.WorkerRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -13,12 +12,12 @@ import java.util.List;
 @Slf4j
 public class WorkerMaster {
     final private WorkerRepository workerRepository;
-    final private RatingMaster ratingMaster;
+    final private WorkerRatingMaster workerRatingMaster;
 
 
-    public WorkerMaster(WorkerRepository workerRepository, RatingMaster ratingMaster) {
+    public WorkerMaster(WorkerRepository workerRepository, WorkerRatingMaster workerRatingMaster) {
         this.workerRepository = workerRepository;
-        this.ratingMaster = ratingMaster;
+        this.workerRatingMaster = workerRatingMaster;
     }
 
     public WorkerEntity getWorker(Long workerId){
@@ -29,10 +28,12 @@ public class WorkerMaster {
         return workerRepository.findAllByManagerId(managerId);
     }
 
-    public void updateRating(Long workerId){
+    public WorkerEntity updateRating(Long workerId){
         WorkerEntity worker = getWorker(workerId);
-        // TODO: сохранит ли в бд без явного save?
-        worker.setRating(ratingMaster.getAVRwithWorker(workerId));
+
+        worker.setRating(workerRatingMaster.getAVRwithWorker(workerId));
+
+        return workerRepository.save(worker);
 
     }
 

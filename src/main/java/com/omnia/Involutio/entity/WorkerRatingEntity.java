@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Entity
 @Data
 @NoArgsConstructor
-public class RatingEntity {
+public class WorkerRatingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,7 +21,7 @@ public class RatingEntity {
     private LocalDate date;
 
 
-    public RatingEntity(double rating, Long workerId, Long date) {
+    public WorkerRatingEntity(double rating, Long workerId, Long date) {
         this.rating = rating;
         this.workerId = workerId;
         this.date = LocalDate.now();
