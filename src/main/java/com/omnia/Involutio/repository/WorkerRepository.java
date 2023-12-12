@@ -6,11 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface WorkerRepository extends JpaRepository<WorkerEntity, Long> {
     List<WorkerEntity> findAllByManagerId(Long managerId);
-
+    Optional<WorkerEntity> findByMail(String mail);
     @Query("SELECT AVG(worker.rating) FROM WorkerEntity worker where worker.managerId = ?1")
     Double getAVG(Long managerId);
 }

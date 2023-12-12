@@ -21,7 +21,7 @@ public class WorkerRatingEntity {
     private LocalDate date;
 
 
-    public WorkerRatingEntity(double rating, Long workerId, Long date) {
+    public WorkerRatingEntity(double rating, Long workerId) {
         this.rating = rating;
         this.workerId = workerId;
         this.date = LocalDate.now();

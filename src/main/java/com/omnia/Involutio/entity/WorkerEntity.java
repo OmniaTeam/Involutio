@@ -17,6 +17,7 @@ public class WorkerEntity {
     private Long managerId;
     private String FIO;
     private String speciality;
+    @Column(unique = true)
     private String mail;
     private Double rating;
 }
