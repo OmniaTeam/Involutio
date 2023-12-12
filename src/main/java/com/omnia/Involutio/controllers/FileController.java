@@ -22,7 +22,7 @@ public class FileController {
         this.fileMaster = fileMaster;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<?> getAll(){
         return ResponseEntity.ok(fileMaster.getAll());
     }
