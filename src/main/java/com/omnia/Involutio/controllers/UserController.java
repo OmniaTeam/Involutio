@@ -1,5 +1,6 @@
 package com.omnia.Involutio.controllers;
 
+import com.omnia.Involutio.dto.UserResponseDTO;
 import com.omnia.Involutio.entity.UserEntity;
 import com.omnia.Involutio.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,6 @@ public class UserController {
      */
     @GetMapping("/{userId}")
     ResponseEntity<?> getUserWithId(@PathVariable Long userId){
-        return ResponseEntity.ok(userService.getUserById(userId));
+        return ResponseEntity.ok(new UserResponseDTO(userService.getUserById(userId)));
     }
 }
