@@ -1,5 +1,6 @@
 package com.omnia.Involutio.entity;
 
+import com.omnia.Involutio.dto.CSVDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,4 +33,20 @@ public class CSVEntity {
     private double bytesReceivedSentRatio;
     private int unansweredQuestionCount;
 
+    public CSVEntity(CSVDTO dto) {
+        this.email = email;
+        this.sentMessages = dto.getSentMessages();
+        this.receivedMessages = dto.getReceivedMessages();
+        this.recipientsCount = dto.getRecipientsCount();
+        this.bccRecipientsCount = dto.getBccRecipientsCount();
+        this.ccRecipientsCount = dto.getCcRecipientsCount();
+        this.unreadMessages4Hours = dto.getUnreadMessages4Hours();
+        this.daysBetweenReceiveAndRead = dto.getDaysBetweenReceiveAndRead();
+        this.repliedMessages = dto.getRepliedMessages();
+        this.outgoingMessageLength = dto.getOutgoingMessageLength();
+        this.messagesOutsideWorkingHours = dto.getMessagesOutsideWorkingHours();
+        this.receivedSentRatio = dto.getReceivedSentRatio();
+        this.bytesReceivedSentRatio = dto.getBytesReceivedSentRatio();
+        this.unansweredQuestionCount = dto.getUnansweredQuestionCount();
+    }
 }

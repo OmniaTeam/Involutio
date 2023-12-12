@@ -1,5 +1,6 @@
 package com.omnia.Involutio.service.file;
 
+import com.omnia.Involutio.dto.CSVDTO;
 import com.omnia.Involutio.entity.CSVEntity;
 import com.omnia.Involutio.repository.CSVRepository;
 import org.springframework.stereotype.Service;
@@ -17,10 +18,13 @@ public class CSVReaderMaster {
         this.csvComponent = csvComponent;
     }
     //TODO: mental magic
-    public List<CSVEntity> read(String filePath) throws IOException {
+    public List<CSVDTO> read(String filePath) throws IOException {
         try {
             var list = csvComponent.parseCsv(filePath);
-            return csvRepository.saveAll(list);
+            for (var i : list){
+                csvRepository.save(new CSVEntity(i));
+            }
+            return list;
         } catch (IOException e) {
             e.printStackTrace();
         }
