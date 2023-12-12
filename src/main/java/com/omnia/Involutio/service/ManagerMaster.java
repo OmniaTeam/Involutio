@@ -2,6 +2,7 @@ package com.omnia.Involutio.service;
 
 import com.omnia.Involutio.ecxeptions.NotFoundException;
 import com.omnia.Involutio.entity.ManagerEntity;
+import com.omnia.Involutio.repository.ManagerRatingRepository;
 import com.omnia.Involutio.repository.ManagerRepository;
 import com.omnia.Involutio.repository.WorkerRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -14,10 +15,13 @@ import java.util.List;
 public class ManagerMaster {
     final private ManagerRepository managerRepository;
     final private WorkerRepository workerRepository;
+    final private ManagerRatingMaster managerRatingMaster;
 
-    public ManagerMaster(ManagerRepository managerRepository, WorkerRepository workerRepository) {
+    public ManagerMaster(ManagerRepository managerRepository, WorkerRepository workerRepository, ManagerRatingMaster managerRatingMaster) {
         this.managerRepository = managerRepository;
         this.workerRepository = workerRepository;
+        this.managerRatingMaster = managerRatingMaster;
+
     }
 
     public List<ManagerEntity> getAll(){
@@ -31,9 +35,11 @@ public class ManagerMaster {
     public void updateRating(Long managerId){
         try {
             var manager = managerRepository.findById(managerId);
-            manager.ifPresent(managerEntity -> managerEntity.setRating(workerRepository.getAVG(managerId)));
+            manager.ifPresent(managerEntity -> managerEntity.setRating(managerRatingMaster.getAVGwithManager(managerId)));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+
 }

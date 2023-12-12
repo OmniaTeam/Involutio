@@ -15,9 +15,15 @@ public class ManagerRatingMaster {
         this.managerRatingRepository = managerRatingRepository;
     }
 
+    //TODO: refactor to sql after testing
     public Double getAVGwithManager(Long managerId){
-
-
+        var worker = workerMaster.getAllWithManager(managerId);
+        double rating = 0;
+        var size = worker.size();
+        for (var i : worker){
+            size += i.getRating();
+        }
+        return rating/size;
     }
 
 

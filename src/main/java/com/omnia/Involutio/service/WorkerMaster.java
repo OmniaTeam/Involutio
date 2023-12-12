@@ -28,10 +28,12 @@ public class WorkerMaster {
         return workerRepository.findAllByManagerId(managerId);
     }
 
-    public void updateRating(Long workerId){
+    public WorkerEntity updateRating(Long workerId){
         WorkerEntity worker = getWorker(workerId);
-        // TODO: сохранит ли в бд без явного save?
+
         worker.setRating(workerRatingMaster.getAVRwithWorker(workerId));
+
+        return workerRepository.save(worker);
 
     }
 
