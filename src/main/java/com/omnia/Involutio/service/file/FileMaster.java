@@ -41,6 +41,7 @@ public class FileMaster {
                 file.transferTo(destFile);
                 return fileEntity ;
             } catch (IOException e) {
+                log.error(e.getMessage());
                 e.printStackTrace();
             }
         }

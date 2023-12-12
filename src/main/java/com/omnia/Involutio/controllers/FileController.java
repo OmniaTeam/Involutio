@@ -29,10 +29,16 @@ public class FileController {
 
     @PostMapping("/upload")
     public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file) {
-        // Добавьте вашу логику обработки файла здесь
-        var fileEntity = fileMaster.create(file);
+        try {
+            // Добавьте вашу логику обработки файла здесь
+            var fileEntity = fileMaster.create(file);
+            return ResponseEntity.ok(fileEntity.toString());
+        }
+        catch (Exception ex) {
+            return ResponseEntity.status(400).build();
+        }
         // Возвращаем ответ с кодом 200 OK в случае успешной обработки файла
-        return ResponseEntity.ok(fileEntity.toString());
+
     }
 
     @GetMapping("/download")
