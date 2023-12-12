@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -31,11 +32,10 @@ public class FileMaster {
 
     public FileEntity create(MultipartFile file){
         if (!file.isEmpty()) {
-            var name = file.getName();
+            var name = LocalDate.now().toString() + file.getOriginalFilename();
             var type = file.getContentType();
             var fileEntity = new FileEntity(name, type);
             fileRepository.save(fileEntity);
-            //String path = "/home/involutio/java/files/";
             try {
                 File destFile = new File(path + name);
                 file.transferTo(destFile);
@@ -50,12 +50,11 @@ public class FileMaster {
 
     public Path download(Long fileId) {
         var fileEntity = fileRepository.findById(fileId);
-        //String path = "/home/involutio/java/files/";
         return fileEntity.map(entity -> Paths.get(path + entity.getName())).orElse(null);
     }
 
     public void uploadDataFromCSV() throws IOException {
-        var files = fileRepository.findByTypeAndProcessedIsFalse("csv");
+        var files = fileRepository.findByTypeAndProcessedIsFalse("text/csv");
         for (var i : files){
             csvReaderMaster.read(path + i.getName());
             i.setProcessed(true);
