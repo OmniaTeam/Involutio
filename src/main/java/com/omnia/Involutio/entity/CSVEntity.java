@@ -8,7 +8,6 @@ import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 
 @Entity
 @Data
@@ -35,18 +34,18 @@ public class CSVEntity {
 
     public CSVEntity(CSVDTO dto) {
         this.email = email;
-        this.sentMessages = dto.getSentMessages();
-        this.receivedMessages = dto.getReceivedMessages();
-        this.recipientsCount = dto.getRecipientsCount();
-        this.bccRecipientsCount = dto.getBccRecipientsCount();
-        this.ccRecipientsCount = dto.getCcRecipientsCount();
-        this.unreadMessages4Hours = dto.getUnreadMessages4Hours();
-        this.daysBetweenReceiveAndRead = dto.getDaysBetweenReceiveAndRead();
-        this.repliedMessages = dto.getRepliedMessages();
-        this.outgoingMessageLength = dto.getOutgoingMessageLength();
-        this.messagesOutsideWorkingHours = dto.getMessagesOutsideWorkingHours();
-        this.receivedSentRatio = dto.getReceivedSentRatio();
-        this.bytesReceivedSentRatio = dto.getBytesReceivedSentRatio();
-        this.unansweredQuestionCount = dto.getUnansweredQuestionCount();
+        this.sentMessages = dto.getSent_messages();
+        this.receivedMessages = dto.getReceived_messages();
+        this.recipientsCount = dto.getRecipients_count();
+        this.bccRecipientsCount = dto.getBcc_recipients_count();
+        this.ccRecipientsCount = dto.getCc_recipients_count();
+        this.unreadMessages4Hours = dto.getUnread_messages_4_hours();
+        this.daysBetweenReceiveAndRead = dto.getDays_between_receive_and_read();
+        this.repliedMessages = dto.getReplied_messages();
+        this.outgoingMessageLength = dto.getOutgoing_message_length();
+        this.messagesOutsideWorkingHours = dto.getMessages_outside_working_hours();
+        this.receivedSentRatio = dto.getReceived_sent_ratio();
+        this.bytesReceivedSentRatio = dto.getBytes_received_sent_ratio();
+        this.unansweredQuestionCount = dto.getUnanswered_question_count();
     }
 }
