@@ -33,7 +33,7 @@ public class CSVEntity {
     private int unansweredQuestionCount;
 
     public CSVEntity(CSVDTO dto) {
-        this.email = email;
+        this.email = dto.getEmail();
         this.sentMessages = dto.getSent_messages();
         this.receivedMessages = dto.getReceived_messages();
         this.recipientsCount = dto.getRecipients_count();
