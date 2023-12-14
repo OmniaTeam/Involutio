@@ -20,6 +20,10 @@ public class WorkerMaster {
         this.workerRatingMaster = workerRatingMaster;
     }
 
+    public WorkerEntity getWorkerByEmail(String email){
+        return workerRepository.findByMail(email).orElseThrow(() -> new NotFoundException(String.format("worker with email %s", email)));
+    }
+
     public WorkerEntity getWorker(Long workerId){
         return workerRepository.findById(workerId).orElseThrow(() -> new NotFoundException(String.format("worker with user id %d", workerId)));
     }
