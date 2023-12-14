@@ -32,16 +32,4 @@ public class WorkerMaster {
         return workerRepository.findAllByManagerId(managerId);
     }
 
-    public WorkerEntity updateRating(Long workerId){
-        WorkerEntity worker = getWorker(workerId);
-
-        worker.setRating(workerRatingMaster.getAVRwithWorker(workerId));
-
-        return workerRepository.save(worker);
-
-    }
-
-
-
-
 }
