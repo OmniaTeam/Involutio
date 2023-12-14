@@ -21,7 +21,7 @@ public class DataDTO {
     private static final double MIN_PROBABILITY = 0.0;
     private static final double MAX_PROBABILITY = 100.0;
 
-    public static double calculateEmployeeAttritionProbability(CSVEntity data) {
+    public static int calculateEmployeeAttritionProbability(CSVEntity data) {
         double probability = 0.0;
 
         probability += data.getSentMessages() * WEIGHT_SENT_MESSAGES;
@@ -41,6 +41,6 @@ public class DataDTO {
         probability = Math.max(MIN_PROBABILITY, probability);
         probability = Math.min(MAX_PROBABILITY, probability);
 
-        return probability;
+        return (int) probability;
     }
 }

@@ -16,12 +16,12 @@ public class WorkerRatingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private double rating;
+    private int rating;
     private Long workerId;
     private LocalDate date;
 
 
-    public WorkerRatingEntity(double rating, Long workerId) {
+    public WorkerRatingEntity(int rating, Long workerId) {
         this.rating = rating;
         this.workerId = workerId;
         this.date = LocalDate.now();
