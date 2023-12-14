@@ -26,7 +26,7 @@ public class WorkerController {
     }
 
     @GetMapping("/{workerId}/stat")
-    ResponseEntity<?> getStatistic(@RequestParam ("start") LocalDate start, @RequestParam ("end") LocalDate end){
-        return ResponseEntity.ok(workerRatingMaster.getStatistic(start,end));
+    ResponseEntity<?> getStatistic(@RequestParam ("start") LocalDate start, @RequestParam ("end") LocalDate end, @PathVariable Long workerId){
+        return ResponseEntity.ok(workerRatingMaster.getStatistic(start,end,workerId));
     }
 }

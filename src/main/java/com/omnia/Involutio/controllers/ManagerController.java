@@ -33,7 +33,7 @@ public class ManagerController {
         return ResponseEntity.ok(managerMaster.getAll());
     }
 
-    @GetMapping("/")
+    @GetMapping()
     ResponseEntity<ManagerEntity> getManager(Authentication authentication){
         Long userId = ((UserEntity) authentication.getPrincipal()).getId();
         return ResponseEntity.ok(managerMaster.getWithUser(userId));
@@ -50,7 +50,7 @@ public class ManagerController {
     }
 
     @GetMapping("/{managerId}/stat")
-    ResponseEntity<?> getStatistic(@RequestParam("start") LocalDate start, @RequestParam ("end") LocalDate end){
-        return ResponseEntity.ok(managerRatingMaster.getStatistic(start,end));
+    ResponseEntity<?> getStatistic(@RequestParam("start") LocalDate start, @RequestParam ("end") LocalDate end, @PathVariable Long managerId){
+        return ResponseEntity.ok(managerRatingMaster.getStatistic(start,end,managerId));
     }
 }

@@ -1,7 +1,9 @@
-package com.omnia.Involutio.service.file;
+package com.omnia.Involutio.service.pdf;
 
 import com.itextpdf.text.DocumentException;
+import com.omnia.Involutio.service.file.FileMaster;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.TemplateEngine;
@@ -15,7 +17,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-@Service
+@Component
 public class PDFBuilder {
     final private FileMaster fileMaster;
     final private TemplateEngine templateEngine;

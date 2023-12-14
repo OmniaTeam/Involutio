@@ -31,7 +31,7 @@ public class ManagerRatingMaster {
     }
 
 
-    public List<ManagerRatingEntity> getStatistic(LocalDate start, LocalDate end) {
-        return managerRatingRepository.findAllByDateBetween(start, end);
+    public List<ManagerRatingEntity> getStatistic(LocalDate start, LocalDate end, Long managerId) {
+        return managerRatingRepository.findAllByDateBetweenAndManagerId(start, end, managerId);
     }
 }
