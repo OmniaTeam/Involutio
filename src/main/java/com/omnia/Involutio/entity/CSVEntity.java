@@ -9,6 +9,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.LocalDate;
+
 @Entity
 @Data
 @Slf4j
@@ -31,6 +33,7 @@ public class CSVEntity {
     private double receivedSentRatio;
     private double bytesReceivedSentRatio;
     private int unansweredQuestionCount;
+    private LocalDate date;
 
     public CSVEntity(CSVDTO dto) {
         this.email = dto.getEmail();
@@ -47,5 +50,6 @@ public class CSVEntity {
         this.receivedSentRatio = dto.getReceived_sent_ratio();
         this.bytesReceivedSentRatio = dto.getBytes_received_sent_ratio();
         this.unansweredQuestionCount = dto.getUnanswered_question_count();
+        this.date = LocalDate.now();
     }
 }

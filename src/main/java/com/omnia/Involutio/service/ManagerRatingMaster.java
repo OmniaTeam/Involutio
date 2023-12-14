@@ -1,7 +1,11 @@
 package com.omnia.Involutio.service;
 
+import com.omnia.Involutio.entity.ManagerRatingEntity;
 import com.omnia.Involutio.repository.ManagerRatingRepository;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class ManagerRatingMaster {
@@ -27,5 +31,7 @@ public class ManagerRatingMaster {
     }
 
 
-
+    public List<ManagerRatingEntity> getStatistic(LocalDate start, LocalDate end) {
+        return managerRatingRepository.findAllByDateBetween(start, end);
+    }
 }
