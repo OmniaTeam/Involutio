@@ -6,7 +6,8 @@ import com.omnia.Involutio.service.UserService;
 import com.omnia.Involutio.service.WorkerMaster;
 import com.omnia.Involutio.service.WorkerRatingMaster;
 import org.springframework.stereotype.Service;
-import org.thymeleaf.context.Context;
+import org.springframework.ui.ExtendedModelMap;
+import org.springframework.ui.Model;
 
 
 @Service
@@ -25,30 +26,30 @@ public class PDFmaster {
         this.userService = userService;
     }
 
-    public void createAllWorker(){
+    public void createAllWorker() {
         var worker_list = workerMaster.getAll();
-        for (var worker : worker_list){
+        for (var worker : worker_list) {
             pdfBuilder.createPDF(worker.getId(), createContextwithWorker(worker));
         }
     }
 
-    private Context createContextwithWorker(WorkerEntity worker){
+    private Model createContextwithWorker(WorkerEntity worker) {
         var manager = managerMaster.getWithManagerId(worker.getManagerId());
         var rating = workerRatingMaster.getLast7Days(worker.getId());
         var avg = 0;
-        if(rating.size() > 0) {
+        if (rating.size() > 0) {
             for (var i : rating) {
                 avg += i.getRating();
             }
             avg = avg / rating.size();
         }
-        var context = new Context();
-        context.setVariable("departmentName", manager.getDepartment());
-        context.setVariable("email", worker.getMail());
-        context.setVariable("managerName", workerMaster.getLead(manager.getId()).getFIO());
-        context.setVariable("curatorName", userService.getUserById(manager.getUserId()).getFio());
-        context.setVariable("avg", avg);
-        context.setVariable("actual", worker.getRating());
+        var context = new ExtendedModelMap();
+        context.addAttribute("departmentName", manager.getDepartment());
+        context.addAttribute("email", worker.getMail());
+        context.addAttribute("managerName", workerMaster.getLead(manager.getId()).getFIO());
+        context.addAttribute("curatorName", userService.getUserById(manager.getUserId()).getFio());
+        context.addAttribute("avg", avg);
+        context.addAttribute("actual", worker.getRating());
         return context;
     }
 }

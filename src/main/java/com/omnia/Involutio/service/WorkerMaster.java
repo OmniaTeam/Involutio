@@ -20,23 +20,25 @@ public class WorkerMaster {
         this.workerRatingMaster = workerRatingMaster;
     }
 
-    public WorkerEntity getWorker(Long workerId){
+    public WorkerEntity getWorker(Long workerId) {
         return workerRepository.findById(workerId).orElseThrow(() -> new NotFoundException(String.format("worker with user id %d", workerId)));
     }
-    public List<WorkerEntity> getAll(){
+
+    public List<WorkerEntity> getAll() {
         return workerRepository.findAll();
     }
 
-    public List<WorkerEntity> getAllWithManager(Long managerId){
+    public List<WorkerEntity> getAllWithManager(Long managerId) {
         return workerRepository.findAllByManagerId(managerId);
     }
+
     //
-    public WorkerEntity getLead(Long managerId){
+    public WorkerEntity getLead(Long managerId) {
         var lead = workerRepository.findByManagerIdAndSpeciality(managerId, "Lead");
         return lead.orElse(null);
     }
 
-    public WorkerEntity updateRating(Long workerId){
+    public WorkerEntity updateRating(Long workerId) {
         WorkerEntity worker = getWorker(workerId);
 
         worker.setRating(workerRatingMaster.getAVRwithWorker(workerId));
@@ -44,8 +46,6 @@ public class WorkerMaster {
         return workerRepository.save(worker);
 
     }
-
-
 
 
 }

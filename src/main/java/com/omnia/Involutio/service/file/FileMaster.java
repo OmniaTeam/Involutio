@@ -26,20 +26,20 @@ public class FileMaster {
         this.csvReaderMaster = csvReaderMaster;
     }
 
-    public List<FileEntity> getAll(){
+    public List<FileEntity> getAll() {
         return fileRepository.findAll();
     }
 
-    public FileEntity create(MultipartFile file){
+    public FileEntity create(MultipartFile file) {
         if (!file.isEmpty()) {
-            var name = LocalDate.now().toString() + file.getOriginalFilename();
+            var name = LocalDate.now() + file.getOriginalFilename();
             var type = file.getContentType();
             var fileEntity = new FileEntity(name, type);
             fileRepository.save(fileEntity);
             try {
                 File destFile = new File(path + name);
                 file.transferTo(destFile);
-                return fileEntity ;
+                return fileEntity;
             } catch (IOException e) {
                 log.error(e.getMessage());
                 e.printStackTrace();
@@ -55,7 +55,7 @@ public class FileMaster {
 
     public void uploadDataFromCSV() throws IOException {
         var files = fileRepository.findByTypeAndProcessedIsFalse("text/csv");
-        for (var i : files){
+        for (var i : files) {
             csvReaderMaster.read(path + i.getName());
             i.setProcessed(true);
             fileRepository.save(i);

@@ -17,11 +17,12 @@ public class CSVReaderMaster {
         this.csvRepository = csvRepository;
         this.csvComponent = csvComponent;
     }
+
     //TODO: mental magic
     public List<CSVDTO> read(String filePath) throws IOException {
         try {
             var list = csvComponent.parseCsv(filePath);
-            for (var i : list){
+            for (var i : list) {
                 csvRepository.save(new CSVEntity(i));
             }
             return list;
@@ -30,9 +31,6 @@ public class CSVReaderMaster {
         }
         return null;
     }
-
-
-
 
 
 }

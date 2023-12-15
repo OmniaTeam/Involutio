@@ -2,7 +2,6 @@ package com.omnia.Involutio.service;
 
 import com.omnia.Involutio.ecxeptions.NotFoundException;
 import com.omnia.Involutio.entity.ManagerEntity;
-import com.omnia.Involutio.repository.ManagerRatingRepository;
 import com.omnia.Involutio.repository.ManagerRepository;
 import com.omnia.Involutio.repository.WorkerRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -24,19 +23,19 @@ public class ManagerMaster {
 
     }
 
-    public List<ManagerEntity> getAll(){
+    public List<ManagerEntity> getAll() {
         return managerRepository.findAll();
     }
 
-    public ManagerEntity getWithUser(Long userId){
+    public ManagerEntity getWithUser(Long userId) {
         return managerRepository.findByUserId(userId).orElseThrow(() -> new NotFoundException(String.format("Manager with user id %d", userId)));
     }
 
-    public ManagerEntity getWithManagerId(Long managerId){
+    public ManagerEntity getWithManagerId(Long managerId) {
         return managerRepository.findById(managerId).orElseThrow(() -> new NotFoundException(String.format("Manager with manager id %d", managerId)));
     }
 
-    public void updateRating(Long managerId){
+    public void updateRating(Long managerId) {
         try {
             var manager = managerRepository.findById(managerId);
             manager.ifPresent(managerEntity -> managerEntity.setRating(managerRatingMaster.getAVGwithManager(managerId)));

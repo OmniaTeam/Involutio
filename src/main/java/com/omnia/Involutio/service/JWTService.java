@@ -19,8 +19,9 @@ import java.util.stream.Stream;
 @Service
 public class JWTService {
     public static String ACCESS_TOKEN = "access_token";
-    public static long ACCESS_TOKEN_TIME = 24*60*60*1000;
+    public static long ACCESS_TOKEN_TIME = 24 * 60 * 60 * 1000;
     public static final String REFRESH_TOKEN = "refresh_token";
+
     private String generateToken(UserEntity user, String token_name, long exp) {
         Claims claims = Jwts.claims();
         claims.put("id", user.getId());
@@ -66,8 +67,7 @@ public class JWTService {
     public boolean isTokenValid(String token) {
         try {
             return extractExpire(token).after(new Date());
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             return false;
         }
 
@@ -95,7 +95,7 @@ public class JWTService {
         cookie.setHttpOnly(true);
         cookie.setPath("/");
         //        cookie.setSecure(true);
-        cookie.setMaxAge((int) (exp.getTime() - new Date().getTime())/1000);
+        cookie.setMaxAge((int) (exp.getTime() - new Date().getTime()) / 1000);
         return cookie;
     }
 

@@ -22,19 +22,20 @@ public class SchedulerService {
     @Scheduled(cron = "0 0/5 * * * *")
     public void uploadCSV() throws IOException {
         try {
-        fileMaster.uploadDataFromCSV();
+            fileMaster.uploadDataFromCSV();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     @Scheduled(cron = "0 0/10 * * * *")
-    public void analys(){
+    public void analys() {
         //анализа данных
         System.out.print("analusis");
     }
 
     @Scheduled(cron = "0 0/1 * * * *")
-    public void pdf(){
+    public void pdf() {
         pdfMaster.createAllWorker();
     }
 

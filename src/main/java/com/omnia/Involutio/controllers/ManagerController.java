@@ -29,28 +29,28 @@ public class ManagerController {
     }
 
     @GetMapping("/all")
-    ResponseEntity<List<ManagerEntity>> getAll(){
+    ResponseEntity<List<ManagerEntity>> getAll() {
         return ResponseEntity.ok(managerMaster.getAll());
     }
 
     @GetMapping()
-    ResponseEntity<ManagerEntity> getManager(Authentication authentication){
+    ResponseEntity<ManagerEntity> getManager(Authentication authentication) {
         Long userId = ((UserEntity) authentication.getPrincipal()).getId();
         return ResponseEntity.ok(managerMaster.getWithUser(userId));
     }
 
     @GetMapping("/{manager_id}")
-    ResponseEntity<ManagerEntity> getManagerById(@PathVariable Long manager_id){
+    ResponseEntity<ManagerEntity> getManagerById(@PathVariable Long manager_id) {
         return ResponseEntity.ok(managerMaster.getWithManagerId(manager_id));
     }
 
     @GetMapping("/{managerId}/workers")
-    ResponseEntity<List<WorkerEntity>> getWorkers(@PathVariable Long managerId){
+    ResponseEntity<List<WorkerEntity>> getWorkers(@PathVariable Long managerId) {
         return ResponseEntity.ok(workerMaster.getAllWithManager(managerId));
     }
 
     @GetMapping("/{managerId}/stat")
-    ResponseEntity<?> getStatistic(@RequestParam("start") LocalDate start, @RequestParam ("end") LocalDate end, @PathVariable Long managerId){
-        return ResponseEntity.ok(managerRatingMaster.getStatistic(start,end,managerId));
+    ResponseEntity<?> getStatistic(@RequestParam("start") LocalDate start, @RequestParam("end") LocalDate end, @PathVariable Long managerId) {
+        return ResponseEntity.ok(managerRatingMaster.getStatistic(start, end, managerId));
     }
 }

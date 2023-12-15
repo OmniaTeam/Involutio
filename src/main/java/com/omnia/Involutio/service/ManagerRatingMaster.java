@@ -20,14 +20,14 @@ public class ManagerRatingMaster {
     }
 
     //TODO: refactor to sql after testing
-    public Double getAVGwithManager(Long managerId){
+    public Double getAVGwithManager(Long managerId) {
         var worker = workerMaster.getAllWithManager(managerId);
         double rating = 0;
         var size = worker.size();
-        for (var i : worker){
+        for (var i : worker) {
             size += i.getRating();
         }
-        return rating/size;
+        return rating / size;
     }
 
 

@@ -2,14 +2,15 @@ package com.omnia.Involutio.service.pdf;
 
 import com.itextpdf.text.DocumentException;
 import com.omnia.Involutio.service.file.FileMaster;
-import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.Context;
-import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
-import org.xhtmlrenderer.pdf.ITextRenderer;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
 import org.springframework.mock.web.MockMultipartFile;
-
+import org.springframework.stereotype.Component;
+import org.springframework.ui.Model;
+import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
+import org.springframework.web.multipart.MultipartFile;
+import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -18,34 +19,44 @@ import java.io.IOException;
 @Component
 public class PDFBuilder {
     final private FileMaster fileMaster;
-    final private TemplateEngine templateEngine;
+
 
     public PDFBuilder(FileMaster fileMaster) {
         this.fileMaster = fileMaster;
-        this.templateEngine = new TemplateEngine();
-        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-        templateResolver.setSuffix(".html");
-        templateResolver.setPrefix("classpath:/templates/");
-        templateEngine.setTemplateResolver(templateResolver);
     }
 
     //TODO: MentalMagic
-    public void createPDF(Long workerId, Context context){
-        //TODO: need fix rout
-        String html = templateEngine.process("template", context);
+    public void createPDF(Long workerId, Model model) {
+        try {
 
-        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
-            ITextRenderer renderer = new ITextRenderer();
-            renderer.setDocumentFromString(html);
-            renderer.layout();
-            renderer.createPDF(outputStream);
-            renderer.finishPDF();
 
-            ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
-            MultipartFile multipartFile = new MockMultipartFile(workerId.toString() + ".pdf", inputStream);
-            fileMaster.create(multipartFile);
+            Configuration configuration = new Configuration(Configuration.VERSION_2_3_31);
+            configuration.setClassForTemplateLoading(PDFBuilder.class, "/templates");
 
-        } catch (IOException | DocumentException e) {
+            // Создание экземпляра Model и добавление данных
+
+            // Получение шаблона FreeMarker
+            Template template = configuration.getTemplate("template.ftl");
+
+            // Преобразование шаблона в строку
+            String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
+
+
+            try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
+                ITextRenderer renderer = new ITextRenderer();
+                renderer.setDocumentFromString(html);
+                renderer.layout();
+                renderer.createPDF(outputStream);
+                renderer.finishPDF();
+
+                ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
+                MultipartFile multipartFile = new MockMultipartFile(workerId.toString() + ".pdf", inputStream);
+                fileMaster.create(multipartFile);
+
+            } catch (IOException | DocumentException e) {
+                e.printStackTrace();
+            }
+        } catch (TemplateException | IOException e) {
             e.printStackTrace();
         }
 

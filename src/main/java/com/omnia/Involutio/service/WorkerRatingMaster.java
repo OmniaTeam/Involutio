@@ -13,32 +13,33 @@ import java.util.List;
 @Slf4j
 public class WorkerRatingMaster {
 
-final private WorkerRatingRepository workerRatingRepository;
+    final private WorkerRatingRepository workerRatingRepository;
 
 
     public WorkerRatingMaster(WorkerRatingRepository workerRatingRepository, ManagerRatingRepository managerRatingRepository) {
         this.workerRatingRepository = workerRatingRepository;
     }
+
     //TODO: refactor to sql after testing
     public Double getAVRwithWorker(Long workerId) {
         var rating_list = workerRatingRepository.findAllByWorkerId(workerId);
         var size = rating_list.size();
         if (size > 0) {
-            double summ = (double) 0;
-            for (var i : rating_list){
+            double summ = 0;
+            for (var i : rating_list) {
                 summ += i.getRating();
             }
             return summ / size;
-        }else {
+        } else {
             return (double) 0;
         }
     }
 
-    public List<WorkerRatingEntity> getStatistic(LocalDate start, LocalDate end, Long workerId){
+    public List<WorkerRatingEntity> getStatistic(LocalDate start, LocalDate end, Long workerId) {
         return workerRatingRepository.findAllByDateBetweenAndWorkerId(start, end, workerId);
     }
 
-    public List<WorkerRatingEntity> getLast7Days(Long workerId){
+    public List<WorkerRatingEntity> getLast7Days(Long workerId) {
         LocalDate start = LocalDate.now().minusDays(7);
         LocalDate end = LocalDate.now();
         return workerRatingRepository.findAllByDateBetweenAndWorkerId(start, end, workerId);

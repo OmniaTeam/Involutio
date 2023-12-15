@@ -10,8 +10,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 public class InvolutioApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(InvolutioApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(InvolutioApplication.class, args);
+    }
 
 }
