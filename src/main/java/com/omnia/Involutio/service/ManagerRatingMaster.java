@@ -1,23 +1,28 @@
 package com.omnia.Involutio.service;
 
+import com.omnia.Involutio.ecxeptions.NotFoundException;
+import com.omnia.Involutio.entity.ManagerEntity;
 import com.omnia.Involutio.entity.ManagerRatingEntity;
 import com.omnia.Involutio.repository.ManagerRatingRepository;
+import com.omnia.Involutio.repository.ManagerRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Service
+@Slf4j
+@RequiredArgsConstructor
 public class ManagerRatingMaster {
 
     final private WorkerMaster workerMaster;
-
     final private ManagerRatingRepository managerRatingRepository;
+    final private ManagerMaster managerMaster;
+    final private ManagerRepository managerRepository;
 
-    public ManagerRatingMaster(WorkerMaster workerMaster, ManagerRatingRepository managerRatingRepository) {
-        this.workerMaster = workerMaster;
-        this.managerRatingRepository = managerRatingRepository;
-    }
+
 
     //TODO: refactor to sql after testing
     public int getAVGwithManager(Long managerId){
@@ -30,11 +35,18 @@ public class ManagerRatingMaster {
         return rating/size;
     }
 
-    //TODO update rating after processing data
     public void updateManagerRating(Long managerId){
-        int updateRating = getAVGwithManager(managerId);
-        ManagerRatingEntity managerRatingEntity = new ManagerRatingEntity(updateRating, managerId);
-        managerRatingRepository.save(managerRatingEntity);
+        try {
+            ManagerEntity managerEntity = managerMaster.getWithManagerId(managerId);
+            int updateRating = getAVGwithManager(managerId);
+            managerEntity.setRating(updateRating);
+            managerRepository.save(managerEntity);
+            ManagerRatingEntity managerRatingEntity = new ManagerRatingEntity(updateRating, managerId);
+            managerRatingRepository.save(managerRatingEntity);
+        }
+        catch (NotFoundException ex) {
+            log.error(ex.getMessage());
+        }
     }
 
 

@@ -3,7 +3,6 @@ package com.omnia.Involutio.service;
 import com.omnia.Involutio.ecxeptions.NotFoundException;
 import com.omnia.Involutio.entity.ManagerEntity;
 import com.omnia.Involutio.repository.ManagerRepository;
-import com.omnia.Involutio.repository.WorkerRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +13,7 @@ import java.util.List;
 public class ManagerMaster {
     final private ManagerRepository managerRepository;
 
-    public ManagerMaster(ManagerRepository managerRepository, WorkerRepository workerRepository, ManagerRatingMaster managerRatingMaster) {
+    public ManagerMaster(ManagerRepository managerRepository) {
         this.managerRepository = managerRepository;
     }
 
@@ -29,5 +28,7 @@ public class ManagerMaster {
     public ManagerEntity getWithManagerId(Long managerId){
         return managerRepository.findById(managerId).orElseThrow(() -> new NotFoundException(String.format("Manager with manager id %d", managerId)));
     }
+
+
 
 }

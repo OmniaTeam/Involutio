@@ -1,5 +1,6 @@
 package com.omnia.Involutio.controllers;
 
+import com.omnia.Involutio.service.ManagerMaster;
 import com.omnia.Involutio.service.file.FileMaster;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.InputStreamResource;
@@ -10,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 
 @RestController
 @Slf4j
@@ -29,6 +29,7 @@ public class FileController {
 
     @PostMapping("/upload/{manager_id}")
     public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file, @PathVariable Long manager_id) {
+
         try {
             // Добавьте вашу логику обработки файла здесь
             var fileEntity = fileMaster.create(file, manager_id);
