@@ -18,12 +18,10 @@ public class CSVReaderMaster {
         this.csvComponent = csvComponent;
     }
     //TODO: mental magic
-    public List<CSVDTO> read(String filePath) throws IOException {
+    public List<CSVEntity> read(String filePath) throws IOException {
         try {
-            var list = csvComponent.parseCsv(filePath);
-            for (var i : list){
-                csvRepository.save(new CSVEntity(i));
-            }
+            var list = csvComponent.parseCsv(filePath).stream().map(CSVEntity::new).toList();
+            csvRepository.saveAll(list);
             return list;
         } catch (IOException e) {
             e.printStackTrace();

@@ -17,5 +17,5 @@ public class ManagerEntity {
     private Long id;
     private Long userId;
     private String department;
-    private Double rating;
+    private Integer rating;
 }

@@ -36,6 +36,7 @@ public class ManagerMaster {
         return managerRepository.findById(managerId).orElseThrow(() -> new NotFoundException(String.format("Manager with manager id %d", managerId)));
     }
 
+    //TODO update rating after processing data
     public void updateRating(Long managerId){
         try {
             var manager = managerRepository.findById(managerId);

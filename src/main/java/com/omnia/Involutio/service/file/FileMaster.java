@@ -1,7 +1,9 @@
 package com.omnia.Involutio.service.file;
 
+import com.omnia.Involutio.entity.CSVEntity;
 import com.omnia.Involutio.entity.FileEntity;
 import com.omnia.Involutio.repository.FileRepository;
+import com.omnia.Involutio.service.DataService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,12 +20,14 @@ import java.util.List;
 public class FileMaster {
     final private FileRepository fileRepository;
     final private CSVReaderMaster csvReaderMaster;
+    final private DataService dataService;
 
     final private String path = "/home/involutio/java/files/";
 
-    public FileMaster(FileRepository fileRepository, CSVReaderMaster csvReaderMaster) {
+    public FileMaster(FileRepository fileRepository, CSVReaderMaster csvReaderMaster, DataService dataService) {
         this.fileRepository = fileRepository;
         this.csvReaderMaster = csvReaderMaster;
+        this.dataService = dataService;
     }
 
     public List<FileEntity> getAll(){
@@ -56,9 +60,10 @@ public class FileMaster {
     public void uploadDataFromCSV() throws IOException {
         var files = fileRepository.findByTypeAndProcessedIsFalse("text/csv");
         for (var i : files){
-            csvReaderMaster.read(path + i.getName());
+            List<CSVEntity> csvEntityList = csvReaderMaster.read(path + i.getName());
             i.setProcessed(true);
             fileRepository.save(i);
+            csvEntityList.forEach(dataService::dataCsvProcessing);
         }
 
     }
