@@ -20,17 +20,17 @@ final private WorkerRatingRepository workerRatingRepository;
         this.workerRatingRepository = workerRatingRepository;
     }
     //TODO: refactor to sql after testing
-    public Double getAVRwithWorker(Long workerId) {
+    public int  getAVRwithWorker(Long workerId) {
         var rating_list = workerRatingRepository.findAllByWorkerId(workerId);
         var size = rating_list.size();
         if (size > 0) {
-            double summ = (double) 0;
+            int summ = 0;
             for (var i : rating_list){
                 summ += i.getRating();
             }
             return summ / size;
         }else {
-            return (double) 0;
+            return 0;
         }
     }
 
