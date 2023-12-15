@@ -23,7 +23,7 @@ public class FileController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getAll(){
+    public ResponseEntity<?> getAll() {
         return ResponseEntity.ok(fileMaster.getAll());
     }
 
@@ -34,8 +34,7 @@ public class FileController {
             // Добавьте вашу логику обработки файла здесь
             var fileEntity = fileMaster.create(file, manager_id);
             return ResponseEntity.ok(fileEntity.toString());
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             return ResponseEntity.status(400).build();
         }
         // Возвращаем ответ с кодом 200 OK в случае успешной обработки файла
@@ -43,7 +42,7 @@ public class FileController {
     }
 
     @GetMapping("/download")
-    public ResponseEntity<?> downloadFile(@RequestParam ("fileId") Long fileId) throws IOException {
+    public ResponseEntity<?> downloadFile(@RequestParam("fileId") Long fileId) throws IOException {
         // Путь к файлу, который вы хотите скачать
         var file = fileMaster.download(fileId);
 

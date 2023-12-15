@@ -14,4 +14,6 @@ public interface WorkerRepository extends JpaRepository<WorkerEntity, Long> {
     Optional<WorkerEntity> findByMail(String mail);
     @Query("SELECT AVG(worker.rating) FROM WorkerEntity worker where worker.managerId = ?1")
     Double getAVG(Long managerId);
+
+    Optional<WorkerEntity> findByManagerIdAndSpeciality(Long managerId, String speciality);
 }

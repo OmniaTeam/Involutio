@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface ManagerRatingRepository extends JpaRepository<ManagerRatingEntity, Long> {
 
-    List<ManagerRatingEntity> findAllByDateBetween(LocalDate start, LocalDate end);
+    List<ManagerRatingEntity> findAllByDateBetweenAndManagerId(LocalDate start, LocalDate end, Long managerId);
 }

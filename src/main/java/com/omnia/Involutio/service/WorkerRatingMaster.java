@@ -34,8 +34,15 @@ final private WorkerRatingRepository workerRatingRepository;
         }
     }
 
-    public List<WorkerRatingEntity> getStatistic(LocalDate start, LocalDate end){
-        return workerRatingRepository.findAllByDateBetween(start, end);
+    public List<WorkerRatingEntity> getStatistic(LocalDate start, LocalDate end, Long workerId) {
+        return workerRatingRepository.findAllByDateBetweenAndWorkerId(start, end, workerId);
     }
+
+    public List<WorkerRatingEntity> getLast7Days(Long workerId) {
+        LocalDate start = LocalDate.now().minusDays(7);
+        LocalDate end = LocalDate.now();
+        return workerRatingRepository.findAllByDateBetweenAndWorkerId(start, end, workerId);
+    }
+
 
 }

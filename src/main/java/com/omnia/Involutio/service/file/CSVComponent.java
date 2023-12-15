@@ -1,7 +1,6 @@
 package com.omnia.Involutio.service.file;
 
 import com.omnia.Involutio.dto.CSVDTO;
-import com.omnia.Involutio.entity.CSVEntity;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import org.springframework.stereotype.Component;

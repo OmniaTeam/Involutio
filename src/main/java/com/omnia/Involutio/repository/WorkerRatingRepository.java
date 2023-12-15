@@ -8,9 +8,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface WorkerRatingRepository extends JpaRepository<WorkerRatingEntity,Long> {
+public interface WorkerRatingRepository extends JpaRepository<WorkerRatingEntity, Long> {
 
     List<WorkerRatingEntity> findAllByWorkerId(Long workerId);
 
-    List<WorkerRatingEntity> findAllByDateBetween(LocalDate startDate, LocalDate endDate);
+    List<WorkerRatingEntity> findAllByDateBetweenAndWorkerId(LocalDate startDate, LocalDate endDate, Long workerId);
 }

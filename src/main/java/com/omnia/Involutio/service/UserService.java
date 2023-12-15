@@ -2,13 +2,12 @@ package com.omnia.Involutio.service;
 
 import com.omnia.Involutio.entity.UserEntity;
 import com.omnia.Involutio.repository.UserRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService{
+public class UserService {
     private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {

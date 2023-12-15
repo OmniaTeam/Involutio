@@ -32,4 +32,14 @@ public class WorkerMaster {
         return workerRepository.findAllByManagerId(managerId);
     }
 
+    public List<WorkerEntity> getAll() {
+        return workerRepository.findAll();
+    }
+
+    //
+    public WorkerEntity getLead(Long managerId) {
+        var lead = workerRepository.findByManagerIdAndSpeciality(managerId, "Lead");
+        return lead.orElse(null);
+    }
+
 }

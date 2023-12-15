@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "spring.thymeleaf.prefix=classpath:/templates/",
+      "type": "java.lang.String",
+      "description": "Description for spring.thymeleaf.prefix=classpath:/templates/."
+    },
+    {
+      "name": "spring.thymeleaf",
+      "type": "java.lang.String",
+      "description": "Description for spring.thymeleaf."
+    }
+  ]
+}

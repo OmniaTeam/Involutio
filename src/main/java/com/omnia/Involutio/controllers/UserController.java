@@ -24,15 +24,15 @@ public class UserController {
     Получение данных пользователя через аутентификацию
      */
     @GetMapping("/")
-    ResponseEntity<?> getUserWithAuthentication(Authentication authentication){
-    return ResponseEntity.ok(((UserEntity) authentication.getPrincipal()));
+    ResponseEntity<?> getUserWithAuthentication(Authentication authentication) {
+        return ResponseEntity.ok(((UserEntity) authentication.getPrincipal()));
     }
 
     /*
     Получение данных пользователя через id
      */
     @GetMapping("/{userId}")
-    ResponseEntity<?> getUserWithId(@PathVariable Long userId){
+    ResponseEntity<?> getUserWithId(@PathVariable Long userId) {
         return ResponseEntity.ok(new UserResponseDTO(userService.getUserById(userId)));
     }
 }
