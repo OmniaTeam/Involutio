@@ -26,7 +26,7 @@ public class PDFBuilder {
     }
 
     //TODO: MentalMagic
-    public void createPDF(Long workerId, Model model) {
+    public void createPDF(Long workerId, Model model, Long manager_id) {
         try {
 
 
@@ -51,7 +51,7 @@ public class PDFBuilder {
 
                 ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
                 MultipartFile multipartFile = new MockMultipartFile(workerId.toString() + ".pdf", inputStream);
-                fileMaster.create(multipartFile);
+                fileMaster.create(multipartFile, manager_id);
 
             } catch (IOException | DocumentException e) {
                 e.printStackTrace();

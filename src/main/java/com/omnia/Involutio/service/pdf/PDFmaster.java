@@ -29,7 +29,7 @@ public class PDFmaster {
     public void createAllWorker() {
         var worker_list = workerMaster.getAll();
         for (var worker : worker_list) {
-            pdfBuilder.createPDF(worker.getId(), createContextwithWorker(worker));
+            pdfBuilder.createPDF(worker.getId(), createContextwithWorker(worker), worker.getManagerId());
         }
     }
 
