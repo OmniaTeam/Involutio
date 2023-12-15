@@ -8,6 +8,7 @@ import com.omnia.Involutio.service.WorkerRatingMaster;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 
+
 @Service
 public class PDFmaster {
     final private WorkerMaster workerMaster;
@@ -35,11 +36,12 @@ public class PDFmaster {
         var manager = managerMaster.getWithManagerId(worker.getManagerId());
         var rating = workerRatingMaster.getLast7Days(worker.getId());
         var avg = 0;
-        for (var i : rating){
-            avg += i.getRating();
+        if(rating.size() > 0) {
+            for (var i : rating) {
+                avg += i.getRating();
+            }
+            avg = avg / rating.size();
         }
-        avg = avg/rating.size();
-
         var context = new Context();
         context.setVariable("departmentName", manager.getDepartment());
         context.setVariable("email", worker.getMail());

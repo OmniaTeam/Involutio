@@ -5,6 +5,7 @@ plugins {
 	id 'org.asciidoctor.jvm.convert' version '3.3.2'
 }
 
+
 group = 'com.omnia'
 version = '0.0.1-SNAPSHOT'
 
@@ -22,6 +23,8 @@ repositories {
 	mavenCentral()
 }
 
+
+
 ext {
 	set('snippetsDir', file("build/generated-snippets"))
 }
@@ -37,8 +40,9 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test:3.1.0'
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
 
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:3.0.4'
-	implementation 'org.xhtmlrenderer:flying-saucer-pdf-itext5:9.1.22'
+	implementation 'org.thymeleaf:thymeleaf:3.0.6.RELEASE'
+	implementation 'org.xhtmlrenderer:flying-saucer-core:9.1.6'
+	implementation 'org.xhtmlrenderer:flying-saucer-pdf-itext5:9.1.6'
 	implementation 'org.springframework:spring-test:6.0.6'
 
 	// security

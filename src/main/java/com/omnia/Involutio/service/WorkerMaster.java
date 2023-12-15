@@ -32,7 +32,8 @@ public class WorkerMaster {
     }
     //
     public WorkerEntity getLead(Long managerId){
-        return workerRepository.findByManagerIdAndSpeciality(managerId, "Lead").get();//похуй
+        var lead = workerRepository.findByManagerIdAndSpeciality(managerId, "Lead");
+        return lead.orElse(null);
     }
 
     public WorkerEntity updateRating(Long workerId){

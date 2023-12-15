@@ -2,9 +2,7 @@ package com.omnia.Involutio.service.pdf;
 
 import com.itextpdf.text.DocumentException;
 import com.omnia.Involutio.service.file.FileMaster;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -27,12 +25,13 @@ public class PDFBuilder {
         this.templateEngine = new TemplateEngine();
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
         templateResolver.setSuffix(".html");
+        templateResolver.setPrefix("classpath:/templates/");
         templateEngine.setTemplateResolver(templateResolver);
     }
 
     //TODO: MentalMagic
     public void createPDF(Long workerId, Context context){
-
+        //TODO: need fix rout
         String html = templateEngine.process("template", context);
 
         try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
