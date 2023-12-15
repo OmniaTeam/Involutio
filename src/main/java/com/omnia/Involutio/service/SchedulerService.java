@@ -1,9 +1,9 @@
 package com.omnia.Involutio.service;
 
 import com.omnia.Involutio.service.file.FileMaster;
+import com.omnia.Involutio.service.pdf.PDFmaster;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.scheduling.annotation.Schedules;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -12,9 +12,11 @@ import java.io.IOException;
 @Slf4j
 public class SchedulerService {
     final private FileMaster fileMaster;
+    final private PDFmaster pdfMaster;
 
-    public SchedulerService(FileMaster fileMaster) {
+    public SchedulerService(FileMaster fileMaster, PDFmaster pdfMaster) {
         this.fileMaster = fileMaster;
+        this.pdfMaster = pdfMaster;
     }
 
     @Scheduled(cron = "0 0/5 * * * *")
@@ -30,5 +32,11 @@ public class SchedulerService {
         //анализа данных
         System.out.print("analusis");
     }
+
+    @Scheduled(cron = "0 0/5 * * * *")
+    public void pdf(){
+        pdfMaster.createAllWorker();
+    }
+
 
 }

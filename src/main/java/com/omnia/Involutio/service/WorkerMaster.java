@@ -23,9 +23,16 @@ public class WorkerMaster {
     public WorkerEntity getWorker(Long workerId){
         return workerRepository.findById(workerId).orElseThrow(() -> new NotFoundException(String.format("worker with user id %d", workerId)));
     }
+    public List<WorkerEntity> getAll(){
+        return workerRepository.findAll();
+    }
 
     public List<WorkerEntity> getAllWithManager(Long managerId){
         return workerRepository.findAllByManagerId(managerId);
+    }
+    //
+    public WorkerEntity getLead(Long managerId){
+        return workerRepository.findByManagerIdAndSpeciality(managerId, "").get();//похуй
     }
 
     public WorkerEntity updateRating(Long workerId){

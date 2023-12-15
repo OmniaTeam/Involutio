@@ -44,4 +44,5 @@ final private WorkerRatingRepository workerRatingRepository;
         return workerRatingRepository.findAllByDateBetweenAndWorkerId(start, end, workerId);
     }
 
+
 }
