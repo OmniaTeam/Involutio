@@ -32,7 +32,7 @@ public class WorkerMaster {
     }
     //
     public WorkerEntity getLead(Long managerId){
-        return workerRepository.findByManagerIdAndSpeciality(managerId, "").get();//похуй
+        return workerRepository.findByManagerIdAndSpeciality(managerId, "Lead").get();//похуй
     }
 
     public WorkerEntity updateRating(Long workerId){

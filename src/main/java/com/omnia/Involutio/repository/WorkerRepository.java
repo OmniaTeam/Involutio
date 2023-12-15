@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface WorkerRepository extends JpaRepository<WorkerEntity, Long> {
@@ -13,4 +14,6 @@ public interface WorkerRepository extends JpaRepository<WorkerEntity, Long> {
 
     @Query("SELECT AVG(worker.rating) FROM WorkerEntity worker where worker.managerId = ?1")
     Double getAVG(Long managerId);
+
+    Optional<WorkerEntity> findByManagerIdAndSpeciality(Long managerId, String speciality);
 }
