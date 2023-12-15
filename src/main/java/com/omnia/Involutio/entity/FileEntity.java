@@ -22,12 +22,14 @@ public class FileEntity {
     private String name;
     private String type;
     private LocalDate date;
+    private Long manager_id;
     private boolean processed;
 
-    public FileEntity(String name, String type) {
+    public FileEntity(String name, String type, Long manager_id) {
         this.name = name;
         this.type = type;
         this.date = LocalDate.now();
+        this.manager_id = manager_id;
         this.processed = false;
     }
 }

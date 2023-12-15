@@ -27,11 +27,11 @@ public class FileController {
         return ResponseEntity.ok(fileMaster.getAll());
     }
 
-    @PostMapping("/upload")
-    public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file) {
+    @PostMapping("/upload/{manager_id}")
+    public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file, @PathVariable Long manager_id) {
         try {
             // Добавьте вашу логику обработки файла здесь
-            var fileEntity = fileMaster.create(file);
+            var fileEntity = fileMaster.create(file, manager_id);
             return ResponseEntity.ok(fileEntity.toString());
         }
         catch (Exception ex) {

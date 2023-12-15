@@ -4,6 +4,7 @@ import com.omnia.Involutio.entity.CSVEntity;
 import com.omnia.Involutio.entity.FileEntity;
 import com.omnia.Involutio.repository.FileRepository;
 import com.omnia.Involutio.service.DataService;
+import com.omnia.Involutio.service.ManagerRatingMaster;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,28 +22,30 @@ public class FileMaster {
     final private FileRepository fileRepository;
     final private CSVReaderMaster csvReaderMaster;
     final private DataService dataService;
+    final private ManagerRatingMaster managerRatingMaster;
 
     final private String path = "/home/involutio/java/files/";
 
-    public FileMaster(FileRepository fileRepository, CSVReaderMaster csvReaderMaster, DataService dataService) {
+    public FileMaster(FileRepository fileRepository, CSVReaderMaster csvReaderMaster, DataService dataService, ManagerRatingMaster managerRatingMaster) {
         this.fileRepository = fileRepository;
         this.csvReaderMaster = csvReaderMaster;
         this.dataService = dataService;
+        this.managerRatingMaster = managerRatingMaster;
     }
 
     public List<FileEntity> getAll(){
         return fileRepository.findAll();
     }
 
-    public FileEntity create(MultipartFile file){
+    public FileEntity create(MultipartFile file, Long manager_id){
         if (!file.isEmpty()) {
             var name = LocalDate.now().toString() + file.getOriginalFilename();
             var type = file.getContentType();
-            var fileEntity = new FileEntity(name, type);
-            fileRepository.save(fileEntity);
+            var fileEntity = new FileEntity(name, type, manager_id);
             try {
                 File destFile = new File(path + name);
                 file.transferTo(destFile);
+                fileRepository.save(fileEntity);
                 return fileEntity ;
             } catch (IOException e) {
                 log.error(e.getMessage());
@@ -64,6 +67,7 @@ public class FileMaster {
             i.setProcessed(true);
             fileRepository.save(i);
             csvEntityList.forEach(dataService::dataCsvProcessing);
+            managerRatingMaster.updateManagerRating(i.getManager_id());
         }
 
     }

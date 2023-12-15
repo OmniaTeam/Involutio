@@ -1,14 +1,11 @@
 package com.omnia.Involutio.service;
 
-import com.omnia.Involutio.entity.CSVEntity;
 import com.omnia.Involutio.service.file.FileMaster;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.scheduling.annotation.Schedules;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.List;
 
 @Service
 @Slf4j
@@ -27,10 +24,4 @@ public class SchedulerService {
             e.printStackTrace();
         }
     }
-//    @Scheduled(cron = "0 0/10 * * * *")
-//    public void analys(List<CSVEntity> csvEntityList){
-//        //анализа данных
-//        System.out.print("analusis");
-//    }
-
 }

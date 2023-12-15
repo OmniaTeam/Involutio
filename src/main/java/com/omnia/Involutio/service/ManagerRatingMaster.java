@@ -30,6 +30,13 @@ public class ManagerRatingMaster {
         return rating/size;
     }
 
+    //TODO update rating after processing data
+    public void updateManagerRating(Long managerId){
+        int updateRating = getAVGwithManager(managerId);
+        ManagerRatingEntity managerRatingEntity = new ManagerRatingEntity(updateRating, managerId);
+        managerRatingRepository.save(managerRatingEntity);
+    }
+
 
     public List<ManagerRatingEntity> getStatistic(LocalDate start, LocalDate end) {
         return managerRatingRepository.findAllByDateBetween(start, end);

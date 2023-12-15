@@ -17,7 +17,13 @@ public class ManagerRatingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private double rating;
+    private int rating;
     private Long managerId;
     private LocalDate date;
+
+    public ManagerRatingEntity(int rating, Long managerId) {
+        this.rating = rating;
+        this.managerId = managerId;
+        this.date = LocalDate.now();
+    }
 }
