@@ -19,7 +19,7 @@ public class SchedulerService {
         this.pdfMaster = pdfMaster;
     }
 
-    @Scheduled(cron = "0 0/1 * * * *")
+    @Scheduled(cron = "0 0/10 * * * *")
     public void uploadCSV() throws IOException {
         try {
             fileMaster.uploadDataFromCSV();
@@ -28,7 +28,7 @@ public class SchedulerService {
         }
     }
 
-    @Scheduled(cron = "0 0/1 * * * *")
+    @Scheduled(cron = "0 0/30 * * * *")
     public void pdf() {
         pdfMaster.createAllWorker();
     }
