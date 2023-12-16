@@ -27,28 +27,32 @@ public class FileController {
         return ResponseEntity.ok(fileMaster.getAll());
     }
 
+    @GetMapping("/pdf")
+    public ResponseEntity<?> getAllPDF(){
+        return ResponseEntity.ok(fileMaster.getAllPDF());
+    }
+
+    @GetMapping("/csv")
+    public ResponseEntity<?> getAllCSV(){
+        return ResponseEntity.ok(fileMaster.getAllCSV());
+    }
+
     @PostMapping("/upload/{manager_id}")
     public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file, @PathVariable Long manager_id) {
-
         try {
-            // Добавьте вашу логику обработки файла здесь
             var fileEntity = fileMaster.create(file, manager_id);
             return ResponseEntity.ok(fileEntity.toString());
         } catch (Exception ex) {
             return ResponseEntity.status(400).build();
         }
-        // Возвращаем ответ с кодом 200 OK в случае успешной обработки файла
-
     }
 
     @GetMapping("/download")
     public ResponseEntity<?> downloadFile(@RequestParam("fileId") Long fileId) throws IOException {
-        // Путь к файлу, который вы хотите скачать
+
         var file = fileMaster.download(fileId);
 
         var resource = new InputStreamResource(Files.newInputStream(file));
-
-        // Определите MIME-тип файла
         String mimeType = Files.probeContentType(file);
 
         return ResponseEntity.ok()

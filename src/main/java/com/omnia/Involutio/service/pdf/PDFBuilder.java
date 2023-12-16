@@ -49,8 +49,8 @@ public class PDFBuilder {
                 renderer.createPDF(outputStream);
                 renderer.finishPDF();
 
-                ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
-                MultipartFile multipartFile = new MockMultipartFile(workerId.toString() + ".pdf", inputStream);
+                MultipartFile multipartFile = new MockMultipartFile(workerId.toString(),workerId.toString() + ".pdf","application/pdf", outputStream.toByteArray());
+
                 fileMaster.create(multipartFile, manager_id);
 
             } catch (IOException | DocumentException e) {

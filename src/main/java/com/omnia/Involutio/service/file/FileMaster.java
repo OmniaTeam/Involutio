@@ -37,9 +37,18 @@ public class FileMaster {
         return fileRepository.findAll();
     }
 
+    public List<FileEntity> getAllPDF(){
+        return fileRepository.findByTypeAndProcessedIsFalse("application/pdf");
+    }
+
+    public List<FileEntity> getAllCSV(){
+        return fileRepository.findByTypeAndProcessedIsFalse("text/csv");
+    }
+
+
     public FileEntity create(MultipartFile file, Long manager_id){
         if (!file.isEmpty()) {
-            var name = LocalDate.now().toString() + file.getOriginalFilename();
+            var name = LocalDate.now().toString() + "_" + file.getOriginalFilename();
             var type = file.getContentType();
             var fileEntity = new FileEntity(name, type, manager_id);
             try {
@@ -61,7 +70,7 @@ public class FileMaster {
     }
 
     public void uploadDataFromCSV() throws IOException {
-        var files = fileRepository.findByTypeAndProcessedIsFalse("text/csv");
+        var files = getAllCSV();
         for (var i : files){
             List<CSVEntity> csvEntityList = csvReaderMaster.read(path + i.getName());
             i.setProcessed(true);
