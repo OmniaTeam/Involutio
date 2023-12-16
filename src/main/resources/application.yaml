@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://82.97.240.16:5432/involutio
-    username: hack
-    password: hack
+    url: jdbc:postgresql://localhost:5432/involutio
+    username: involutio
+    password: involutio
   jpa:
     show-sql: true
     hibernate:
