@@ -44,12 +44,14 @@ public class PDFmaster {
             avg = avg / rating.size();
         }
         var context = new ExtendedModelMap();
+        context.addAttribute("fio", worker.getFIO());
         context.addAttribute("departmentName", manager.getDepartment());
         context.addAttribute("email", worker.getMail());
         context.addAttribute("managerName", workerMaster.getLead(manager.getId()).getFIO());
         context.addAttribute("curatorName", userService.getUserById(manager.getUserId()).getFio());
         context.addAttribute("avg", avg);
         context.addAttribute("actual", worker.getRating());
+
         return context;
     }
 }
