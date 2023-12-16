@@ -10,5 +10,7 @@ import java.util.List;
 @Repository
 public interface ManagerRatingRepository extends JpaRepository<ManagerRatingEntity, Long> {
 
+    Boolean existsByDateAndManagerId(LocalDate date, Long managerId);
+
     List<ManagerRatingEntity> findAllByDateBetweenAndManagerId(LocalDate start, LocalDate end, Long managerId);
 }

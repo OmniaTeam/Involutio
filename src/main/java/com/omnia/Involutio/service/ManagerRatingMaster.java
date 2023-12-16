@@ -41,6 +41,7 @@ public class ManagerRatingMaster {
             int updateRating = getAVGwithManager(managerId);
             managerEntity.setRating(updateRating);
             managerRepository.save(managerEntity);
+            if (managerRatingRepository.existsByDateAndManagerId(LocalDate.now(), managerId)) return;
             ManagerRatingEntity managerRatingEntity = new ManagerRatingEntity(updateRating, managerId);
             managerRatingRepository.save(managerRatingEntity);
         }
