@@ -17,5 +17,7 @@ public class WorkerEntity {
     private String speciality;
     @Column(unique = true)
     private String mail;
+    private double regression_k;
+    private double regression_b;
     private Integer rating;
 }

@@ -1,6 +1,7 @@
 package com.omnia.Involutio.service;
 
 import com.omnia.Involutio.dto.DataDTO;
+import com.omnia.Involutio.dto.RegressionCoordinates;
 import com.omnia.Involutio.ecxeptions.NotFoundException;
 import com.omnia.Involutio.entity.CSVEntity;
 import com.omnia.Involutio.entity.WorkerEntity;
@@ -11,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -18,7 +21,9 @@ public class DataService {
 
     private final WorkerMaster workerMaster;
     private final WorkerRepository workerRepository;
+    private final WorkerRatingMaster workerRatingMaster;
     private final WorkerRatingRepository workerRatingRepository;
+    private final LinearMaster linearMaster;
 
     public void dataCsvProcessing(CSVEntity csvEntity) {
         WorkerEntity worker;
@@ -35,6 +40,10 @@ public class DataService {
         WorkerRatingEntity workerRatingEntity = new WorkerRatingEntity(rating, worker.getId());
         workerRatingRepository.save(workerRatingEntity);
         worker.setRating(rating);
+        List<Integer> last7Days = workerRatingMaster.getLast7Days(worker.getId()).stream().map(WorkerRatingEntity::getRating).toList();
+        RegressionCoordinates coordinates = linearMaster.getCoordinates(last7Days);
+        worker.setRegression_k(coordinates.k());
+        worker.setRegression_b(coordinates.b());
         workerRepository.save(worker);
 
     }
