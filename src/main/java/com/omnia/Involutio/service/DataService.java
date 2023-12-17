@@ -41,6 +41,7 @@ public class DataService {
         workerRatingRepository.save(workerRatingEntity);
         worker.setRating(rating);
         List<Integer> last7Days = workerRatingMaster.getLast7Days(worker.getId()).stream().map(WorkerRatingEntity::getRating).toList();
+        last7Days.forEach((x) -> log.info(x.toString()));
         RegressionCoordinates coordinates = linearMaster.getCoordinates(last7Days);
         worker.setRegression_k(coordinates.k());
         worker.setRegression_b(coordinates.b());
