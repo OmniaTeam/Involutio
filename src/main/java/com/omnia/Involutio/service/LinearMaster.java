@@ -16,8 +16,8 @@ public class LinearMaster {
             regression.addData(rating, index);
             index++;
         }
-        double k = regression.getSlope();
-        double b = regression.getIntercept();
+        Double k = regression.getSlope();
+        Double b = regression.getIntercept();
         log.info(String.format("k = %f", k));
         log.info(String.format("b = %f", b));
         return new RegressionCoordinates(k, b);
